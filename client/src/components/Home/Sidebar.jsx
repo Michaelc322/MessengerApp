@@ -9,7 +9,7 @@ import { useContext } from 'react'
 import AddFriendModal from './AddFriendModal'
 
 const Sidebar = () => {
-    const {friendList, setFriendList} = useContext(FriendContext);
+    const {friendList} = useContext(FriendContext);
     const {isOpen, onOpen, onClose} = useDisclosure();
   return (
     <>
@@ -23,12 +23,12 @@ const Sidebar = () => {
         <Divider/>
 
         <VStack as={TabList}>
-                {friendList.map(friend => {
-                    <HStack as={Tab}>
+                {friendList.map(friend => (
+                    <HStack as={Tab} key={`friend:${friend}`}>
                         <Circle bg={friend.connected ? "green.500" : "red.500"} w="15px" h="15px"/>
-                        <Text>{friend.username}</Text>
+                        <Text>{friend}</Text>
                     </HStack>
-                })}
+                ))}
 
         </VStack>
     </VStack>

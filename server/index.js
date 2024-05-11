@@ -15,7 +15,7 @@ const io = new Server(server, {
 });
 
 const redisClient = require('./redis');
-const { authorizeUser } = require('./controllers/socketController');
+const { authorizeUser, addFriend, initializeUser } = require('./controllers/socketController');
 app.use(helmet())
 app.use(cors(corsConfig));
 
@@ -30,8 +30,12 @@ io.use(wrap(sessionMiddleware));
 io.use(authorizeUser);
 
 io.on("connect", (socket) => {
-    console.log(socket.user.userid)
-    console.log(socket.request.session.user.username)
+    initializeUser(socket);
+    socket.on("add_friend", (friendName, cb) => {
+        addFriend(socket, friendName, cb);
+    })
+
+    socket.on("disconnecting", () => {})
 });
 
 server.listen(4000, () => {
