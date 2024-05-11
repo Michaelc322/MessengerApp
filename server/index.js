@@ -15,7 +15,7 @@ const io = new Server(server, {
 });
 
 const redisClient = require('./redis');
-const { authorizeUser, addFriend, initializeUser } = require('./controllers/socketController');
+const { authorizeUser, addFriend, initializeUser, onDisconnect } = require('./controllers/socketController');
 app.use(helmet())
 app.use(cors(corsConfig));
 
@@ -35,7 +35,7 @@ io.on("connect", (socket) => {
         addFriend(socket, friendName, cb);
     })
 
-    socket.on("disconnecting", () => {})
+    socket.on("disconnecting", () => onDisconnect(socket));
 });
 
 server.listen(4000, () => {

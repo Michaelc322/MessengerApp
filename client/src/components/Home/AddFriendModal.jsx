@@ -28,9 +28,9 @@ const AddFriendModal = ({isOpen, onClose}) => {
                 friendName: Yup.string().required("Username required").min(6, "Invalid Username").max(28, "Invalid Username"),
             })}
             onSubmit={(values, actions) => {
-                socket.emit("add_friend", values.friendName, ({errorMsg, done}) => {
+                socket.emit("add_friend", values.friendName, ({errorMsg, done, newFriend}) => {
                     if(done){
-                        setFriendList(c => [values.friendName, ...c])
+                        setFriendList(c => [newFriend, ...c])
                         closeModal();
                         return ;
                     }
