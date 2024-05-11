@@ -25,7 +25,7 @@ const Sidebar = () => {
         <VStack as={TabList}>
                 {friendList.map(friend => (
                     <HStack as={Tab} key={`friend:${friend}`}>
-                        <Circle bg={friend.connected ? "green.700" : "red.500"} w="15px" h="15px"/>
+                        <Circle bg={"" + friend.connected === "true" ? "green.700" : "red.500"} w="15px" h="15px"/>
                         <Text>{friend.username}</Text>
                     </HStack>
                 ))}
