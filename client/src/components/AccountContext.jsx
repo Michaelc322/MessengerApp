@@ -9,7 +9,7 @@ const UserContext = ({ children }) => {
     const navigate = useNavigate();
     const [user, setUser] = useState({loggedIn: null});
     useEffect(() => {
-        fetch("http://localhost:4000/auth/login", {
+        fetch(`${process.env.REACT_APP_SERVER_URL}`, {
             credentials: "include",
 
         }).catch(err => {
@@ -30,6 +30,7 @@ const UserContext = ({ children }) => {
             setUser({...data});
             navigate("/home");
         })
+        // eslint-disable-next-line
     }, []);
     return <AccountContext.Provider value={{user, setUser}}>{children}</AccountContext.Provider>
 }

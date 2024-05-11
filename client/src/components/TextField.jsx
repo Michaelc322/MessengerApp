@@ -1,5 +1,5 @@
 import {FormControl, FormLabel, FormErrorMessage } from '@chakra-ui/form-control'
-import {Field, useField, useFormik} from "formik"
+import {Field, useField} from "formik"
 import {Input} from '@chakra-ui/input'
 
 const TextField = ({label, ...props}) => {
@@ -13,4 +13,4 @@ const TextField = ({label, ...props}) => {
     )
 }
 
-export default TextField
+export default TextField;

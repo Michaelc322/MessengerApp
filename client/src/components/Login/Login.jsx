@@ -2,10 +2,10 @@ import { VStack, ButtonGroup, Heading, Button, Text } from '@chakra-ui/react'
 import React from 'react'
 import * as Yup from 'yup'
 import { Form, Formik } from "formik"
-import TextField from '../TextField'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router'
 import { useContext, useState } from 'react'
 import { AccountContext } from '../AccountContext'
+import TextField from '../TextField'
 
 const Login = () => {
     const {setUser} = useContext(AccountContext);
@@ -24,7 +24,7 @@ const Login = () => {
     onSubmit={(values, actions) => {
         const vals = {...values}
         actions.resetForm();
-        fetch("http://localhost:4000/auth/login", {
+        fetch(`${process.env.REACT_APP_SERVER_URL}/auth/login`, {
             method: "POST",
             credentials: "include",
             headers: {
